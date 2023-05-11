@@ -2,21 +2,27 @@
 // @route   GET api/goals
 // @access  Private
 const getGoals = (req, res) => {
-    res.status.json({ message: "Get Goals" })
+    res.json({ message: "Get Goals" })
 }
 
 // @desc    Create Goals
 // @route   POST api/goals
 // @access  Private
 const createGoals = (req, res) => {
-    res.status.json({ message: "create Goals" })
+
+    if (Object.keys(req.body).length === 0) {
+        res.status(400)
+        throw new Error("Add a field")
+    }
+
+    res.json({ message: "create Goals" })
 }
 
 // @desc    Update Goals
 // @route   PATCH api/goals
 // @access  Private
 const updateGoal = (req, res) => {
-    res.status.json({ message: "update Goals" })
+    res.json({ message: "update Goals" })
 }
 
 
@@ -24,7 +30,7 @@ const updateGoal = (req, res) => {
 // @route   PATCH api/goals
 // @access  Private
 const deleteGoal = (req, res) => {
-    res.status.json({ message: "delete Goals" })
+    res.json({ message: "delete Goals" })
 }
 
 module.exports = {
