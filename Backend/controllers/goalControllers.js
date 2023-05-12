@@ -1,9 +1,11 @@
 const asyncHandler = require("express-async-handler")
+const goal = require("../models/goalModel")
 // @desc    Get Goals
 // @route   GET api/goals
 // @access  Private
 const getGoals = asyncHandler(async (req, res) => {
-    res.json({ message: "Get Goals" })
+    const allGoals = await goal.find();
+    res.status(200).json(allGoals)
 })
 
 // @desc    Create Goals
@@ -15,15 +17,23 @@ const createGoals = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error("Add a field")
     }
-
-    res.json({ message: "create Goals" })
+    const newGoal = await goal.create({
+        text: req.body.text
+    })
+    res.status(201).json(newGoal)
 })
 
 // @desc    Update Goals
 // @route   PATCH api/goals
 // @access  Private
 const updateGoal = asyncHandler(async (req, res) => {
-    res.json({ message: "update Goals" })
+    const getGoal = await goal.findById(req.params.id);
+    if (!getGoal) {
+        res.status(400);
+        throw new Error("Couldn't Find Goal")
+    }
+    const updatedGoal = await goal.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    res.status(200).json(updatedGoal)
 })
 
 
@@ -31,7 +41,13 @@ const updateGoal = asyncHandler(async (req, res) => {
 // @route   PATCH api/goals
 // @access  Private
 const deleteGoal = asyncHandler(async (req, res) => {
-    res.json({ message: "delete Goals" })
+    const getGoal = await goal.findById(req.params.id);
+    if (!getGoal) {
+        res.status(400);
+        throw new Error("Item not Found");
+    }
+    await goal.deleteOne({ _id: req.params.id });
+    res.status(200).json({ message: "Item Deleted" })
 })
 
 module.exports = {
