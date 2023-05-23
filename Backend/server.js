@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose')
 require('dotenv').config()
 const connDB = require("./config/db")
 const app = express();
@@ -10,6 +9,7 @@ app.use(express.urlencoded({ extended: false }))
 
 // Middleware for api
 app.use("/api/goal", require("./routes/goalRoutes"))
+app.use("/api/users", require("./routes/userRoutes"));
 // Middleware for error
 
 app.use(require("./middleware/errorMiddleware"))
