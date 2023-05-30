@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  padding: 0px 30px;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: solid 0.2px rgba(0, 0, 0, 0.1);
+}
+header ul {
+  display: flex;
+  gap: 0px 20px;
+}
+header ul li a {
+  display: flex;
+  align-items: center;
+  gap: 0px 10px;
+}
