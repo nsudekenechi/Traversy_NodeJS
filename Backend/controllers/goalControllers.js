@@ -4,7 +4,7 @@ const goal = require("../models/goalModel")
 // @route   GET api/goals
 // @access  Private
 const getGoals = asyncHandler(async (req, res) => {
-    const allGoals = await goal.find();
+    const allGoals = await goal.find({ user: req.user.id });
     res.status(200).json(allGoals)
 })
 
@@ -18,7 +18,8 @@ const createGoals = asyncHandler(async (req, res) => {
         throw new Error("Add a field")
     }
     const newGoal = await goal.create({
-        text: req.body.text
+        text: req.body.text,
+        user: req.user.id
     })
     res.status(201).json(newGoal)
 })
@@ -31,6 +32,11 @@ const updateGoal = asyncHandler(async (req, res) => {
     if (!getGoal) {
         res.status(400);
         throw new Error("Couldn't Find Goal")
+    }
+    // Checking if user is updating another person's Goal
+    if (req.user._id !== getGoal._user) {
+        res.status(400);
+        throw new Error("You Can't Update Another User's Goal")
     }
     const updatedGoal = await goal.findByIdAndUpdate(req.params.id, req.body, { new: true })
     res.status(200).json(updatedGoal)
