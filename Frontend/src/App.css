@@ -4,6 +4,13 @@
 }
 body {
   padding: 0px 30px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+#container {
+  width: 50%;
+  padding: 40px 0px;
+  margin: auto;
 }
 li {
   list-style: none;
@@ -25,4 +32,39 @@ header ul li a {
   display: flex;
   align-items: center;
   gap: 0px 10px;
+}
+section {
+  margin-bottom: 30px;
+}
+section h1 {
+  margin-bottom: 10px;
+}
+section p {
+  color: rgba(0, 0, 0, 0.6);
+  font-style: italic;
+}
+form div {
+  margin-bottom: 25px;
+  width: 600px;
+  display: flex;
+}
+form input {
+  padding: 15px;
+  width: 100%;
+  outline: none;
+  transition: 1s;
+  border: solid 0.2px rgba(0, 0, 0, 0.1);
+}
+form input:focus {
+  border: blue solid 0.2px;
+  border-radius: 10px;
+}
+button {
+  border: none;
+  padding: 15px;
+  width: 100%;
+  display: block;
+  margin: auto;
+  background: #000;
+  color: white;
 }
